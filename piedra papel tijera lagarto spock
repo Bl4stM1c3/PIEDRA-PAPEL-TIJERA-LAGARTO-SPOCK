@@ -1,0 +1,37 @@
+#Posible solucion al ejercicio 59 de https://retosdeprogramacion.com/ejercicios/
+#Crea un programa que calcule quien gana más partidas al piedra,
+#* papel, tijera, lagarto, spock.
+# * - El resultado puede ser: "Player 1", "Player 2", "Tie" (empate)
+# * - La función recibe un listado que contiene pares, representando cada jugada.
+# * - El par puede contener combinaciones de "🗿" (piedra), "📄" (papel),
+# *   "✂️" (tijera), "🦎" (lagarto) o "🖖" (spock).
+# * - Ejemplo. Entrada: [("🗿","✂️"), ("✂️","🗿"), ("📄","✂️")]. Resultado: "Player 2".
+# * - Debes buscar información sobre cómo se juega con estas 5 posibilidades.
+
+
+def juego(array):
+    
+    #Declaramos las variables
+    
+    jugador1 = 0
+    jugador2 = 0
+    
+    reglas = {
+        "🗿":("✂️","🦎"),
+        "📄":("🗿","🖖"),
+        "✂️":("📄","🦎"),
+        "🦎":("📄","🖖"),
+        "🖖":("🗿","✂️")
+    }
+    
+    for jugada1, jugada2 in array:
+        if jugada1 in reglas[jugada2]:
+            jugador2 += 1
+        elif jugada2 in reglas[jugada1]:
+            jugador1 += 1
+        
+    
+    
+    return print(f"{jugador1} - {jugador2} jugador 1 gana" if jugador1 > jugador2 else
+                 f"{jugador1} - {jugador2} jugador 2 gana" if jugador1 < jugador2 else
+                 f"{jugador1} - {jugador2} empate!!!")
